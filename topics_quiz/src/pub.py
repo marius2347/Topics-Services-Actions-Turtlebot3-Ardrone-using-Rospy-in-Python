@@ -18,7 +18,7 @@ def callback(msg):
         move.angular.z = -0.5
 
 
-    if vector[0] < 1:
+    if vector[179] < 1:
         move.angular.z = 0.5
 
     pub.publish(move)
