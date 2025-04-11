@@ -12,11 +12,10 @@ def callback(msg):
        move.linear.x = 0.5
 
     if vector[179] < 1:
-        move.angular.z = -0.5
+        move.angular.z = 0.5
 
     if vector[359] < 1:
         move.angular.z = 0.5
-
 
     if vector[0] < 1:
         move.angular.z = -0.5
