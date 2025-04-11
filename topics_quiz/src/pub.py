@@ -7,19 +7,18 @@ from sensor_msgs.msg import LaserScan
 def callback(msg):
     move = Twist()
     vector = msg.ranges
-    print("Right: {}, Front: {}, Left: {}".format(vector[75], vector[0], vector[125]))
-    if vector[0] > 1:
+    print("Right: {}, Front: {}, Left: {}".format(vector[359], vector[179], vector[0]))
+    if vector[179] > 1:
        move.linear.x = 0.5
 
+    if vector[179] < 1:
+        move.angular.z = -0.5
+
+    if vector[359] < 1:
+        move.angular.z = -0.5
+
+
     if vector[0] < 1:
-        move.linear.x = -0.2
-        move.angular.z = -0.5
-
-    if vector[75] < 1:
-        move.angular.z = -0.5
-
-
-    if vector[125] < 1:
         move.angular.z = 0.5
 
     pub.publish(move)
