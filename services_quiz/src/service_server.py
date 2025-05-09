@@ -4,7 +4,6 @@ from services_quiz.srv import RSquareServ, RSquareServResponse
 from geometry_msgs.msg import Twist
 
 
-
 def callback(request):
    sd = request.side
    rp = request.repetitions
@@ -15,7 +14,10 @@ def callback(request):
    while i <= rp:
        pub.publish(move)
        i += 1
-  
+   
+   move.linear.x = 0
+   move.angular.z = 0
+   pub.publish(move)
    response = RSquareServResponse()
    response.success = True
    return RSquareServ()
