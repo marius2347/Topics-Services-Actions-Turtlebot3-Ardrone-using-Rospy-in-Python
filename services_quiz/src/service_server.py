@@ -1,30 +1,43 @@
 #!/usr/bin/env python
+import math
 import rospy
-from services_quiz.srv import RSquareServ, RSquareServResponse
 from geometry_msgs.msg import Twist
+from services_quiz.srv import RSquareServ, RSquareServResponse
 
+pub = None
 
-def callback(request):
-   sd = request.side
-   rp = request.repetitions
+def move_square(side, reps):
+    linear_speed = 0.2
+    angular_speed = 0.5
+    cmd = Twist()
+    rate = rospy.Rate(10)
+    for i in range(reps):
+        for j in range(4):
+            cmd.linear.x = linear_speed
+            cmd.angular.z = 0.0
+            t0 = rospy.Time.now().to_sec()
+            while rospy.Time.now().to_sec() - t0 < side / linear_speed:
+                pub.publish(cmd)
+                rate.sleep()
+            cmd.linear.x = 0.0
+            cmd.angular.z = angular_speed
+            t0 = rospy.Time.now().to_sec()
+            while rospy.Time.now().to_sec() - t0 < math.pi / 2.0 / angular_speed:
+                pub.publish(cmd)
+                rate.sleep()
+    cmd.linear.x = 0.0
+    cmd.angular.z = 0.0
+    pub.publish(cmd)
 
-   i = 0
-   move.linear.x = sd
-   move.angular.z = sd
-   while i <= rp:
-       pub.publish(move)
-       i += 1
-   
-   move.linear.x = 0
-   move.angular.z = 0
-   pub.publish(move)
-   response = RSquareServResponse()
-   response.success = True
-   return RSquareServ()
+def handle(req):
+    move_square(req.side, req.repetitions)
+    return RSquareServResponse(True)
 
-rospy.init_node("right_square_node", anonymous = True)
-server = rospy.Service("/rsquare_server", RSquareServ, callback)
-pub = rospy.Publisher("/cmd_vel", Twist, queue_size = 1)
-move = Twist()
-rospy.loginfo("The server is up and running!")
-rospy.spin()
+def main():
+    global pub
+    rospy.init_node("square_server")
+    pub = rospy.Publisher("/cmd_vel", Twist, queue_size=1)
+    rospy.Service("/square_server", RSquareServ, handle)
+    rospy.spin()
+
+main()
