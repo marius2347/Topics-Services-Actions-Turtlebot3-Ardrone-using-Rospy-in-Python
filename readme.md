@@ -47,8 +47,8 @@ This repository contains three examples demonstrating how to create and use ROS 
 - **Service Server**: Listens for requests on a custom service. When called, it commands the robot to move in a square of side length `side` meters, repeated `repetitions` times. Returns a boolean indicating success.
 - **Service Client**: A separate node that sends a `RSquareServ.srv` request (with `side` and `repetitions`) to the server and prints the returned `success` flag.
 - **Launchfiles**:  
-  - `launch/square_server.launch` – starts the service server.
-  - `launch/square_client.launch` – starts the client and calls the service with preset arguments.
+  - `launch/start_server.launch` – starts the service server.
+  - `launch/start_client.launch` – starts the client and calls the service with preset arguments.
 
 ---
 
