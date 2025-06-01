@@ -25,9 +25,7 @@ This repository contains three examples demonstrating how to create and use ROS 
   - If the laser reading **in front** is **lower than 1 meter**, the robot turns left.
   - If the laser reading at the **right side** is **lower than 1 meter**, the robot turns left.
   - If the laser reading at the **left side** is **lower than 1 meter**, the robot turns right.
-
-Refer to the code in `src/topics_node.py` for the full implementation.
-
+    
 ---
 
 ## 2. Services
@@ -46,13 +44,11 @@ Refer to the code in `src/topics_node.py` for the full implementation.
     - `int32 repetitions` – the number of times to execute the square movement.
   - **Response** fields:
     - `bool success` – whether the robot completed the square(s) successfully.
-- **Service Server**: Listens for requests on a custom service (e.g., `/square_move`). When called, it commands the robot to move in a square of side length `side` meters, repeated `repetitions` times. Returns a boolean indicating success.
+- **Service Server**: Listens for requests on a custom service. When called, it commands the robot to move in a square of side length `side` meters, repeated `repetitions` times. Returns a boolean indicating success.
 - **Service Client**: A separate node that sends a `SquareMove.srv` request (with `side` and `repetitions`) to the server and prints the returned `success` flag.
 - **Launchfiles**:  
   - `launch/square_server.launch` – starts the service server.
   - `launch/square_client.launch` – starts the client and calls the service with preset arguments.
-
-Refer to the files in `srv/SquareMove.srv`, `src/square_server.py`, and `src/square_client.py` for complete examples.
 
 ---
 
