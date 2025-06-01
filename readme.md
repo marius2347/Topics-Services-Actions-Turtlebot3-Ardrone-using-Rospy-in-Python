@@ -66,7 +66,7 @@ This repository contains three examples demonstrating how to create and use ROS 
   - **Goal** fields:
     - `string command` – either `TAKEOFF` or `LAND`.
   - **Feedback**:
-    - `string status` – a message published once (e.g., “Taking off…” or “Landing…”).
+    - `string status` – a message published once.
   - **Result**:
     - _(Empty)_ – no result messages beyond feedback.
 - **Action Server**:  
