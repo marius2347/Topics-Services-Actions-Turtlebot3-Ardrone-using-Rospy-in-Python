@@ -81,8 +81,6 @@ Refer to the files in `srv/SquareMove.srv`, `src/square_server.py`, and `src/squ
   - Sends a goal with either `TAKEOFF` or `LAND` and waits for the action to complete.
   - Prints feedback messages as they arrive.
 
-Refer to the files in `action/DroneControl.action`, `src/drone_action_server.py`, and `src/drone_action_client.py`.
-
 ---
 
 ## Contact
